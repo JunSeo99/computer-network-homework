@@ -1,27 +1,80 @@
-# computer-network-homework-server
+# 수학 연산 WebSocket 서버 (HW1)
 
-💧 A project built with the Vapor web framework.
+ Vapor 웹 프레임워크로 구축된 수학 연산 서버입니다.
 
-## Getting Started
+## 프로젝트 개요
 
-To build the project using the Swift Package Manager, run the following command in the terminal from the root of the project:
+클라이언트가 WebSocket을 통해 수학 수식을 전송하면, 서버가 계산 결과를 실시간으로 반환하는 프로그램입니다.
+
+### 주요 기능
+
+- **수식 계산**: 사칙연산(+, -, *, /)과 괄호를 포함한 수식 처리
+- **실시간 통신**: WebSocket을 통한 즉시 응답
+- **에러 처리**: 잘못된 수식 형식에 대한 에러 메시지 전송
+- **웹 테스트 인터페이스**: 브라우저에서 바로 테스트 가능
+
+### 사용 예시
+
+- `(3+5)/3-74` → 계산 결과 반환
+- `2*3+5` → 계산 결과 반환  
+- `10/2` → 계산 결과 반환
+- `(2+5?3-74` → "수식 형식이 잘못되었습니다." 에러 메시지
+
+## 실행 방법
+
+### 1. 서버 빌드 및 실행
+
 ```bash
 swift build
-```
-
-To run the project and start the server, use the following command:
-```bash
 swift run
 ```
 
-To execute tests, use the following command:
-```bash
-swift test
+### 2. 테스트 페이지 접속
+
+브라우저에서 `http://localhost:8080/hw1`에 접속하여 테스트할 수 있습니다.
+
+### 3. WebSocket 직접 연결
+
+WebSocket 엔드포인트: `ws://localhost:8080/ws`
+
+## API 엔드포인트
+
+- `GET /` - 서버 상태 확인
+- `GET /hw1` - 웹 테스트 페이지
+- `WebSocket /ws` - 수학 연산 통신
+
+## 메시지 형식
+
+### 클라이언트 → 서버
+```
+수식 문자열 (예: "(3+5)/2")
 ```
 
-### See more
+### 서버 → 클라이언트
 
-- [Vapor Website](https://vapor.codes)
-- [Vapor Documentation](https://docs.vapor.codes)
-- [Vapor GitHub](https://github.com/vapor)
-- [Vapor Community](https://github.com/vapor-community)
+**성공 응답:**
+```json
+{
+    "type": "result",
+    "expression": "(3+5)/2",
+    "result": "4",
+    "success": true
+}
+```
+
+**에러 응답:**
+```json
+{
+    "type": "error", 
+    "expression": "(3+5?2",
+    "error": "수식 형식이 잘못되었습니다.",
+    "success": false
+}
+```
+
+## 기술 스택
+
+- **Swift 6.0**
+- **Vapor 4.115.0** - 웹 프레임워크
+- **WebSocket** - 실시간 통신
+- **SwiftNIO** - 비동기 네트워킹
