@@ -5,7 +5,7 @@ import Testing
 
 @Suite("App Tests")
 
-struct computer-network-homework-serverTests {
+struct computer_network_homework_serverTests {
     @Test("Test Hello World Route")
     func helloWorld() async throws {
         try await withApp(configure: configure) { app in

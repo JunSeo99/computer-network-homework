@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:computer-network-homework-server}",
+            "name": "Debug computer-network-homework-server",
+            "program": "${workspaceFolder:computer-network-homework-server}/.build/debug/computer-network-homework-server",
+            "preLaunchTask": "swift: Build Debug computer-network-homework-server"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:computer-network-homework-server}",
+            "name": "Release computer-network-homework-server",
+            "program": "${workspaceFolder:computer-network-homework-server}/.build/release/computer-network-homework-server",
+            "preLaunchTask": "swift: Build Release computer-network-homework-server"
+        }
+    ]
+}
